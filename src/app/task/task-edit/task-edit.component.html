@@ -1,0 +1,61 @@
+<md-grid-list cols="1" *ngIf = "isLoaded">
+  <md-card class="dashboard-card">
+    <md-card-title>Редактирование задачи</md-card-title>
+    <md-card-content>
+      <form class="example-form" #taskForm="ngForm">
+        <section class="example-section">
+          <!--<md-checkbox md-list-icon class="example-half-width" name="status"-->
+
+                       <!--[checked]="task.status"-->
+                       <!--[(ngModel)]="task.status">-->
+                       <!--{{task.status ? 'Выполнено': 'Не Выполненно'}}</md-checkbox>-->
+          <!--<md-select  placeholder="Выберите срочность" class="example-half-width" name="urgency" [(ngModel)]="task.urgency">-->
+            <!--<md-option *ngFor="let item of urgencyList" [value]="item.name">{{item['name']}}</md-option>-->
+          <!--</md-select>-->
+        </section>
+
+        <md-input-container class="example-full-width">
+          <input mdInput placeholder="Название" name="name" required pattern="[A-Za-z]{4,10}" [(ngModel)]="task.name" #taskName="ngModel">
+        </md-input-container>
+        <div [hidden]="taskName.valid || taskName.untouched" class="error">
+          Имя отсутствует или короче 4 символов
+        </div>
+
+        <md-input-container class="example-full-width">
+          <!--<input type="date" mdInput name="date" #taskDate-->
+                   <!--value="{{task.finishTo}}">-->
+          <input mdInput [ngModel]="task.finishTo | date:'yyyy-MM-dd'" (ngModelChange)="task.finishTo = $event" type="text" name="startDate" #taskDate="ngModel"/>
+        </md-input-container>
+        <div [hidden]="taskDate.valid || taskDate.untouched" class="error">
+          Дата отсутствует
+        </div>
+
+        <md-input-container class="example-full-width">
+                    <textarea mdInput placeholder="Описание задачи" name="descriptionTask"
+                              required [(ngModel)]="task.description"></textarea>
+        </md-input-container>
+        <div [hidden]="true" class="error">
+          Описание обязательно
+        </div>
+
+        <a md-raised-button [color]="accent" (click)="createTask()" [disabled]="!taskForm.form.valid">
+          <md-icon>check</md-icon>Сохранить
+        </a> &nbsp;
+        <a md-raised-button [color]="accent" (click)="createEmptyTask(); taskForm.reset()">
+          Стереть
+        </a>
+        <br>
+
+      </form>
+    </md-card-content>
+  </md-card>
+
+</md-grid-list>
+
+
+
+<md-grid-list cols="1" *ngIf = "!isLoaded">
+  <md-card class="loading-card">
+    <img class="loading" src="./assets/images/loading.gif">
+  </md-card>
+</md-grid-list>
