@@ -1,5 +1,5 @@
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
-@import '../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
 
 
 html {
@@ -17,4 +17,16 @@ body {
 }
 .mat-toolbar-row {
     justify-content: space-between;
+}
+.mat-chip.mat-primary {
+    background-color: #3f51b5!important;
+    color: #fff!important;
+}
+.mat-chip.mat-accent {
+    background-color: #ff4081!important;
+    color: #fff!important;
+}
+.mat-chip.mat-warn {
+    background-color: #f44336!important;
+    color: #fff!important;
 }

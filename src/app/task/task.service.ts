@@ -35,7 +35,7 @@ export class TaskService {
 
   getFilteredTasks(): Observable<FilteredTasks> {
     return new Observable(observer => {
-      this.appService.getAllTasks().subscribe(values => {
+      this.appService.getAllTasks().then(values => {
           this.satData(values);
           observer.next(this.filteredTasks);
           observer.complete();

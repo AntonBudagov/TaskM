@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
   preserveWhitespaces: false,
 })
 export class AppComponent {
-  title = 'app';
   links = [
     { path: '/dashboard', icon: 'home', label: 'Главная'},
     { path: '/task', icon: 'event_name', label: 'Задачи'},

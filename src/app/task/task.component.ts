@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FilteredTasks, UrgencyMap} from '../models/task.interface';
 import { TaskService } from './task.service';
+import {AppService} from "../app.service";
 
 @Component({
   selector: 'app-task',
@@ -8,20 +9,24 @@ import { TaskService } from './task.service';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
+  tasks: any[];
   isLoaded: Boolean = false;
   isCompletedVisible: Boolean = false;
-  urgencyMap: Object[] = UrgencyMap;
+  urgencyMap: any[] = UrgencyMap;
+
   filteredTasks: FilteredTasks = {
     completed : [],
     uncompleted: []
   };
 
   constructor (
-    private taskService: TaskService
+    private taskService: TaskService,
+    private appService: AppService
   ) { }
 
   ngOnInit() {
-    this.getTask();
+    this.getTasks();
+    this.getTaskFilter();
 
     /*  Пример вызова Observable напрямую из сервиса похоже на Promise
      this.taskService.getAllTasks()
@@ -31,13 +36,19 @@ export class TaskComponent implements OnInit {
      error => console.log(error))
      */
   }
-  getTask() {
-    this.taskService.getFilteredTasks().subscribe(values => {
+  getTaskFilter() {
+    this.taskService.getFilteredTasks()
+        .subscribe(values => {
           this.filteredTasks = values;
           this.isLoaded = true;
           console.log(this.filteredTasks);
         },
         error => console.log(error));
+  }
+
+  getTasks() {
+    this.appService.getAllTasks()
+        .then(tasks => this.tasks = tasks);
   }
 
   toggleCompleted() {

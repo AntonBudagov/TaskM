@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-add.component.css']
 })
 export class TaskAddComponent implements OnInit {
-
+  isLoaded: Boolean = false;
   constructor() { }
 
   ngOnInit() {

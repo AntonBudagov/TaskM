@@ -8,9 +8,13 @@ import { RouterModule } from '@angular/router';
 import {
   MdGridListModule, MdSlideToggleModule, MdChipsModule, MdCheckboxModule, MdListModule,
   MdIconModule, MdSelectModule, MdButtonModule, MdCardModule, MdInputModule, MatDatepickerModule, MdNativeDateModule,
-  MdToolbarModule, MdSliderModule, MdSidenavModule
+  MdToolbarModule, MdSliderModule, MdSidenavModule, MdDatepickerModule
 } from '@angular/material';
+import 'hammerjs';
 
+// Imports for loading & configuring the in-memory web api
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
 
 import { AppComponent } from './app.component';
 import { TaskComponent } from './task/task.component';
@@ -23,6 +27,8 @@ import { TaskEditComponent } from './task/task-edit/task-edit.component';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TaskAddComponent } from './task/task-add/task-add.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +36,8 @@ import { TaskAddComponent } from './task/task-add/task-add.component';
     TaskComponent,
     DashboardComponent,
     TaskEditComponent,
-    TaskAddComponent
+    TaskAddComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -39,8 +46,9 @@ import { TaskAddComponent } from './task/task-add/task-add.component';
     HttpModule,
     ReactiveFormsModule,
     FormsModule,
-
-
+    // Imports for loading & configuring the in-memory web api
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    //  --
     MdGridListModule,
     MdCardModule,
     MdSlideToggleModule,
@@ -54,7 +62,9 @@ import { TaskAddComponent } from './task/task-add/task-add.component';
     MdToolbarModule,
     MdSidenavModule,
     // MatDatepickerModule,
-    MdNativeDateModule
+    MdNativeDateModule,
+    MdDatepickerModule
+
 
   ],
   providers: [TaskService, AppService],
