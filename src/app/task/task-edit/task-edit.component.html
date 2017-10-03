@@ -11,8 +11,11 @@
                        [(ngModel)]="task.status">
                        {{task.status ? 'Выполнено': 'Не Выполненно'}}</md-checkbox>
           <!--[(ngModel)]="task.urgency"-->
-          <md-select  placeholder="Выберите срочность" class="example-half-width" name="urgency" >
-            <md-option *ngFor="let item of urgencyList" [value]="urgencyList[item.urgency].code">{{item['name']}}</md-option>
+          <md-select
+                  placeholder="Выберите срочность"
+                  class="example-half-width"
+                  name="urgency" [(ngModel)]="urgencyList[task.urgency].name">
+            <md-option *ngFor="let item of urgencyList" [value]="item.name">{{item['name']}}</md-option>
           </md-select>
         </section>
 

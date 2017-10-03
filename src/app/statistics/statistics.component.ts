@@ -5,7 +5,8 @@ import { StatisticsService } from './statistics.service';
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.css']
+  styleUrls: ['./statistics.component.css'],
+  providers: [ StatisticsService ]
 })
 export class StatisticsComponent implements OnInit {
   isLoaded: Boolean = false;
@@ -13,11 +14,11 @@ export class StatisticsComponent implements OnInit {
   constructor(private statisticsService: StatisticsService) { }
 
   ngOnInit() {
-    this.statisticsService.getStatistics().then(values => {
-          this.statistics = values;
-          this.isLoaded = true;
-        },
-        error => console.log(error));
+      this.statisticsService.getStatistics().subscribe(values => {
+              this.statistics = values;
+              this.isLoaded = true;
+          },
+          error => console.log(error));
   }
 
 }
